@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Any, Literal, Optional, cast
 
 from loguru import logger
+from tqdm import tqdm
 
 from earth2studio.utils.imports import (
     OptionalDependencyFailure,
@@ -464,13 +465,18 @@ class ConfigManager:
         logger.remove()
         logger.configure(extra={"execution_id": ""})
         logger.add(
-            sys.stderr,
+            lambda msg: tqdm.write(msg, end="", file=sys.stderr),
             format=self.config.logging.format,
             level=self.config.logging.level.upper(),
+            colorize=False,
         )
 
         # Intercept stdlib loggers (uvicorn, FastAPI, etc.) into loguru
-        logging.basicConfig(handlers=[_InterceptHandler()], level=0, force=True)
+        logging.basicConfig(
+            handlers=[_InterceptHandler()],
+            level=logging.getLevelName(self.config.logging.level.upper()),
+            force=True,
+        )
 
     @property
     def workflow_config(self) -> dict[str, Any]:
