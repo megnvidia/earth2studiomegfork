@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added Himawari-8/9 AHI ISatSS L2 Full Disk satellite data source (`HimawariAHI`)
 - Added GHCN-Daily global station observation data frame source (`GHCNDaily`)
 - Added NNJA conventional (in-situ + GPS RO) observation data source (`NNJAObsConv`)
+- Added GOES Geostationary Lightning Mapper L2 LCFA event data source (`GOESGLM`)
 - Added real-time GDAS conventional observation data source (`NomadsGDASObsConv`)
 - Added `quality` field to `E2STUDIO_SCHEMA` for observation QC markers
 
